@@ -1,0 +1,19 @@
+# Ambiente virtual Python (cada máquina cria o seu com "python -m venv venv")
+venv/
+env/
+
+# Contém a chave de API real - nunca deve ir para o repositório
+.env
+
+# Dados reais do estoque (custo, valor total etc.) - não deve ir para
+# um repositório público. Mantém a pasta no Git via data/.gitkeep,
+# só o CSV com dados reais fica de fora.
+data/*.csv
+
+# Cache de bytecode do Python
+__pycache__/
+*.pyc
+
+# Configurações de editores/IDEs
+.vscode/
+.idea/
