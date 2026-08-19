@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📦 wmsbox-agent
+# wmsbox-agent
 
 ### Agente de IA que responde perguntas em linguagem natural sobre estoque de eletrônicos
 
@@ -13,7 +13,7 @@
 
 ---
 
-## 📖 Índice
+## Índice
 
 - [Sobre o Projeto](#sobre)
 - [Problema](#problema)
@@ -30,7 +30,7 @@
 ---
 
 <a name="sobre"></a>
-## 🎯 Sobre o Projeto
+## Sobre o Projeto
 
 O **wmsbox-agent** é um agente de IA construído em Python para o desafio final **"Alura Agent"**. Ele lê um CSV com o estoque de um armazém de eletrônicos e responde, em português e em linguagem natural, perguntas sobre esses dados — sem que a pessoa precise abrir a planilha ou escrever uma fórmula.
 
@@ -44,7 +44,7 @@ O **wmsbox-agent** é um agente de IA construído em Python para o desafio final
 ---
 
 <a name="problema"></a>
-## ❓ Problema
+## Problema
 
 Consultar estoque hoje normalmente significa abrir uma planilha, aplicar filtros manualmente e, muitas vezes, montar uma fórmula nova para cada pergunta diferente. Isso é lento e exige saber onde cada coluna está e como combiná-las.
 
@@ -53,7 +53,7 @@ A proposta aqui é inverter isso: a pessoa faz a pergunta como faria para um col
 ---
 
 <a name="arquitetura"></a>
-## 🧠 Arquitetura do Agente
+## Arquitetura do Agente
 
 Perguntas sobre estoque são numéricas (somas, contagens, filtros, comparações) e exigem operar sobre a tabela inteira. Por isso o agente usa **`create_pandas_dataframe_agent`** (LangChain + `langchain-experimental`): o LLM traduz a pergunta em código pandas real, esse código é executado de verdade sobre o `DataFrame` carregado do CSV, e o resultado devolvido é exato — não uma aproximação de texto.
 
@@ -67,7 +67,7 @@ Pergunta → LLM gera código pandas → executa no DataFrame → resposta exata
 ---
 
 <a name="stack"></a>
-## 🛠️ Stack Tecnológica
+## Stack Tecnológica
 
 | Categoria | Tecnologia | Função |
 |:---------:|:----------:|:------:|
@@ -81,7 +81,7 @@ Pergunta → LLM gera código pandas → executa no DataFrame → resposta exata
 ---
 
 <a name="estrutura"></a>
-## 📁 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```
 wmsbox-agent/
@@ -101,21 +101,21 @@ wmsbox-agent/
 ---
 
 <a name="instalacao"></a>
-## ⚙️ Como Rodar
+## Como Rodar
 
 ### Pré-requisitos
 
 - Python 3.11+
 - Um token da Hugging Face, gratuito, com permissão **"Inference"**, gerado em [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
 
-### 1️⃣ Clonar o repositório
+### 1. Clonar o repositório
 
 ```bash
 git clone https://github.com/Eduardodanield/wmsbox-agent.git
 cd wmsbox-agent
 ```
 
-### 2️⃣ Criar e ativar o ambiente virtual
+### 2. Criar e ativar o ambiente virtual
 
 ```bash
 python -m venv venv
@@ -127,13 +127,13 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-### 3️⃣ Instalar as dependências
+### 3. Instalar as dependências
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4️⃣ Configurar o token de API
+### 4. Configurar o token de API
 
 ```bash
 # Copie o modelo e cole seu token real dentro do .env gerado
@@ -146,7 +146,7 @@ Abra o `.env` e preencha:
 HUGGINGFACE_API_TOKEN=seu_token_aqui
 ```
 
-### 5️⃣ Colocar o CSV de estoque
+### 5. Colocar o CSV de estoque
 
 Coloque seu arquivo em `data/estoque.csv`, com as colunas:
 
@@ -156,7 +156,7 @@ a_caminho_magazine, full_pegleve_qtd, a_caminho_pegleve,
 custo_unitario, total_reais, estoque_geral
 ```
 
-### 6️⃣ Rodar o agente
+### 6. Rodar o agente
 
 ```bash
 python src/main.py
@@ -179,21 +179,30 @@ Agente: [resposta calculada em tempo real a partir do seu CSV]
 ---
 
 <a name="exemplos"></a>
-## 💬 Exemplos de Uso
+## Exemplos de Uso
 
-*(Respostas reais omitidas de propósito — são calculadas a partir dos seus dados comerciais. O que segue descreve o que o agente faz por trás de cada pergunta.)*
+### Perguntas testadas e validadas
 
-| Pergunta | O que o agente faz |
+| Pergunta | Resposta do agente |
 |---|---|
-| "Quantas unidades do produto X temos?" | Filtra a linha pelo `sku`/`produto` e lê `estoque_geral` |
-| "Quais itens estão com estoque físico zerado?" | `df[df['fisico_atual'] == 0]` |
-| "Qual o valor total em estoque?" | `df['total_reais'].sum()` |
-| "Quais produtos têm mais de X unidades a caminho do Full?" | `df[df['a_caminho_magazine'] > X]` |
+| Qual o valor total em estoque? | R$ 7.201.110,22 |
+| Quantos produtos estão com estoque físico zerado? | 61 produtos |
+| Quais os 5 produtos com maior estoque geral? | 1. Teclado Sem Fio T10 Verde (WMS-0148) — 4399 un.<br>2. Cartão de Memória Neo Azul (WMS-0094) — 3965 un.<br>3. Suporte Veicular Max Azul (WMS-0132) — 2620 un.<br>4. Controle Bluetooth Lite Vermelho (WMS-0131) — 2510 un.<br>5. Adaptador USB S1 Verde (WMS-0247) — 2254 un. |
+
+Essas três respostas foram conferidas manualmente contra o CSV (`df['total_reais'].sum()`, `df[df['fisico_atual'] == 0]` e `df.nlargest(5, 'estoque_geral')`, respectivamente) e batem exatamente.
+
+### Outras perguntas que o agente também responde
+
+O agente segue o mesmo princípio para qualquer combinação de filtro/soma/contagem sobre as colunas do CSV — estas ainda não foram testadas formalmente, mas usam a mesma lógica das já validadas acima:
+
+- "Quantas unidades do produto WMS-0001 temos?"
+- "Quais produtos têm mais de 10 unidades a caminho do Full Magazine?"
+- "Quantos tipos diferentes de produto existem no estoque?"
 
 ---
 
 <a name="decisoes"></a>
-## 💡 Decisões Técnicas
+## Decisões Técnicas
 
 | Decisão | Motivo |
 |---|---|
@@ -206,7 +215,7 @@ Agente: [resposta calculada em tempo real a partir do seu CSV]
 ---
 
 <a name="limitacoes"></a>
-## ⚠️ Limitações Conhecidas
+## Limitações Conhecidas
 
 - **Perguntas compostas em uma frase só** (ex: "qual o SKU *e* quantas unidades tem o primeiro produto?") podem fazer o agente retornar uma resposta vazia. Perguntas de uma coisa por vez funcionam de forma confiável.
 - `langchain-experimental` (pacote que fornece o `create_pandas_dataframe_agent`) está marcado pelo mantenedor como não mais ativamente desenvolvido. Continua funcional, mas vale acompanhar se o LangChain lançar um substituto oficial.
@@ -215,7 +224,7 @@ Agente: [resposta calculada em tempo real a partir do seu CSV]
 ---
 
 <a name="proximos"></a>
-## 🚀 Próximos Passos
+## Próximos Passos
 
 - Empacotar a aplicação em um Dockerfile
 - Deploy em Oracle Cloud Infrastructure (OCI)
@@ -224,7 +233,7 @@ Agente: [resposta calculada em tempo real a partir do seu CSV]
 ---
 
 <a name="referencias"></a>
-## 📚 Referências
+## Referências
 
 - **Curso "Alura Agent"** — [alura.com.br](https://www.alura.com.br/) — desafio final que originou este projeto
 - **Canal Hashtag Programação** — vídeo [*"Agente de IA completo com Python - Projeto RAG com Langchain"*](https://www.youtube.com/watch?v=0M8iO5ykY-E) — base de aprendizado sobre LangChain
