@@ -102,12 +102,11 @@ wmsbox-agent/
 ├── .env.example               ← Modelo do arquivo de variáveis de ambiente
 ├── data/
 │   └── estoque.csv             ← Base de dados do estoque
-├── src/
-│   ├── config.py               ← Carrega o token e configura o LLM (Hugging Face)
-│   ├── agente_estoque.py       ← Carrega o CSV e monta o agente pandas
-│   ├── main.py                 ← Ponto de entrada: loop de perguntas no terminal
-│   └── app_streamlit.py        ← Ponto de entrada: interface web (chat)
-└── assets/                     ← Reservado para imagens/prints do README
+└── src/
+    ├── config.py               ← Carrega o token e configura o LLM (Hugging Face)
+    ├── agente_estoque.py       ← Carrega o CSV e monta o agente pandas
+    ├── main.py                 ← Ponto de entrada: loop de perguntas no terminal
+    └── app_streamlit.py        ← Ponto de entrada: interface web (chat)
 ```
 
 ---
