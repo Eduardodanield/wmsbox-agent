@@ -1,0 +1,21 @@
+﻿sku,produto,tipo,mlb_codigo,fisico_atual,full_magazine_qtd,a_caminho_magazine,full_pegleve_qtd,a_caminho_pegleve,custo_unitario,total_reais,estoque_geral
+EX-0001,Fone de Ouvido Bluetooth,Fone,MLB900000001,40,7,0,23,4,72.55,5078.5,70
+EX-0002,Cabo USB-C 1m,Cabo,MLB900000002,8,47,3,21,8,35.43,2692.68,76
+EX-0003,Carregador Turbo 20W,Carregador,MLB900000003,27,2,0,2,3,69.68,2160.08,31
+EX-0004,Caixa de Som Portatil,Caixa de Som,MLB900000004,38,1,6,22,10,179.81,10968.41,61
+EX-0005,Suporte para Celular,Suporte,MLB900000005,26,14,14,18,4,205.22,11902.76,58
+EX-0006,Adaptador HDMI,Adaptador,MLB900000006,0,48,5,22,6,94.96,6647.2,70
+EX-0007,Controle Bluetooth Universal,Controle,MLB900000007,9,13,10,3,1,104.28,2607.0,25
+EX-0008,Cartao de Memoria 64GB,Cartao de Memoria,MLB900000008,22,54,11,19,4,204.68,19444.6,95
+EX-0009,Mouse Sem Fio,Mouse,MLB900000009,29,34,3,29,6,33.52,3083.84,92
+EX-0010,Teclado Mecanico Compacto,Teclado,MLB900000010,18,53,11,18,3,180.57,16070.73,89
+EX-0011,Power Bank 10000mAh,Power Bank,MLB900000011,2,42,7,24,4,246.53,16764.04,68
+EX-0012,Webcam Full HD,Webcam,MLB900000012,14,55,3,12,4,121.55,9845.55,81
+EX-0013,Hub USB 4 Portas,Hub,MLB900000013,23,10,11,11,3,172.49,7589.56,44
+EX-0014,Fone com Fio P2,Fone,MLB900000014,4,38,5,17,3,53.4,3150.6,59
+EX-0015,Carregador Veicular Duplo,Carregador,MLB900000015,24,17,7,21,5,213.07,13210.34,62
+EX-0016,Cabo HDMI 2m,Cabo,MLB900000016,3,14,1,25,5,109.27,4589.34,42
+EX-0017,Suporte Veicular Magnetico,Suporte,MLB900000017,4,13,10,6,10,132.32,3043.36,23
+EX-0018,Mousepad Grande,Acessorio,MLB900000018,29,9,8,4,3,190.07,7982.94,42
+EX-0019,Caixa de Som Bluetooth Mini,Caixa de Som,MLB900000019,34,16,13,28,9,108.86,8491.08,78
+EX-0020,Adaptador USB-C para P2,Adaptador,MLB900000020,14,8,15,2,0,217.36,5216.64,24

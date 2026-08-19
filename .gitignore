@@ -6,9 +6,9 @@ env/
 .env
 
 # Dados reais do estoque (custo, valor total etc.) - não deve ir para
-# um repositório público. Mantém a pasta no Git via data/.gitkeep,
-# só o CSV com dados reais fica de fora.
-data/*.csv
+# um repositório público. data/estoque_exemplo.csv (dados fictícios)
+# continua versionado normalmente.
+data/estoque.csv
 
 # Cache de bytecode do Python
 __pycache__/
