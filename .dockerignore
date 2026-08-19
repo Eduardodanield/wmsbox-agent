@@ -1,0 +1,8 @@
+# Nunca deixa esses entrarem no contexto de build / na imagem
+venv/
+.env
+__pycache__/
+*.pyc
+.git/
+.vscode/
+.idea/
