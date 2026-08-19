@@ -5,11 +5,6 @@ env/
 # Contém a chave de API real - nunca deve ir para o repositório
 .env
 
-# Dados reais do estoque (custo, valor total etc.) - não deve ir para
-# um repositório público. data/estoque_exemplo.csv (dados fictícios)
-# continua versionado normalmente.
-data/estoque.csv
-
 # Cache de bytecode do Python
 __pycache__/
 *.pyc
