@@ -23,7 +23,10 @@ with st.sidebar:
     st.subheader("Estoque")
 
     if st.checkbox("Ver estoque atual"):
-        st.dataframe(st.session_state.df_ativo, use_container_width=True)
+        if st.session_state.df_ativo is not None:
+            st.dataframe(st.session_state.df_ativo, use_container_width=True)
+        else:
+            st.info("Nenhum estoque carregado ainda.")
 
     st.divider()
 
@@ -63,23 +66,26 @@ with st.sidebar:
         if st.button(exemplo, use_container_width=True):
             st.session_state["pergunta_pendente"] = exemplo
 
-# Reexibe o histórico do chat.
-for autor, texto in st.session_state.mensagens:
-    with st.chat_message(autor):
-        st.markdown(texto)
+if st.session_state.agente_ativo is None:
+    st.info("Nenhum estoque carregado ainda. Importe um CSV na barra lateral para começar.")
+else:
+    # Reexibe o histórico do chat.
+    for autor, texto in st.session_state.mensagens:
+        with st.chat_message(autor):
+            st.markdown(texto)
 
-# Botão de exemplo clicado também vira pergunta.
-pergunta = st.chat_input("Digite sua pergunta sobre o estoque...")
-if "pergunta_pendente" in st.session_state:
-    pergunta = st.session_state.pop("pergunta_pendente")
+    # Botão de exemplo clicado também vira pergunta.
+    pergunta = st.chat_input("Digite sua pergunta sobre o estoque...")
+    if "pergunta_pendente" in st.session_state:
+        pergunta = st.session_state.pop("pergunta_pendente")
 
-if pergunta:
-    st.session_state.mensagens.append(("user", pergunta))
-    with st.chat_message("user"):
-        st.markdown(pergunta)
+    if pergunta:
+        st.session_state.mensagens.append(("user", pergunta))
+        with st.chat_message("user"):
+            st.markdown(pergunta)
 
-    with st.chat_message("assistant"):
-        with st.spinner("Consultando o estoque..."):
-            resposta = st.session_state.agente_ativo.invoke({"input": pergunta})
-            st.markdown(resposta["output"])
-    st.session_state.mensagens.append(("assistant", resposta["output"]))
+        with st.chat_message("assistant"):
+            with st.spinner("Consultando o estoque..."):
+                resposta = st.session_state.agente_ativo.invoke({"input": pergunta})
+                st.markdown(resposta["output"])
+        st.session_state.mensagens.append(("assistant", resposta["output"]))

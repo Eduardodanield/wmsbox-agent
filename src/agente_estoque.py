@@ -30,8 +30,13 @@ def criar_agente(df):
     )
 
 
+# data/estoque.csv não vai pro Git (dados comerciais reais), então pode
+# não existir — no Streamlit Cloud, por exemplo. Nesse caso, quem usa a
+# tela importa o próprio CSV depois.
 # utf-8-sig remove o BOM do CSV (senão a coluna "sku" vem com caractere invisível junto).
-df = pd.read_csv(CAMINHO_CSV, encoding="utf-8-sig")
-
-# Agente padrão, usado pelo main.py (terminal).
-agente = criar_agente(df)
+if os.path.exists(CAMINHO_CSV):
+    df = pd.read_csv(CAMINHO_CSV, encoding="utf-8-sig")
+    agente = criar_agente(df)
+else:
+    df = None
+    agente = None

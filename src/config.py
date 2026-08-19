@@ -8,6 +8,15 @@ load_dotenv()
 
 HUGGINGFACE_API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN")
 
+# No Streamlit Community Cloud não existe .env — o token vem do painel de
+# "Secrets" do próprio serviço, exposto via st.secrets.
+if not HUGGINGFACE_API_TOKEN:
+    try:
+        import streamlit as st
+        HUGGINGFACE_API_TOKEN = st.secrets.get("HUGGINGFACE_API_TOKEN")
+    except Exception:
+        pass
+
 # Falha cedo com mensagem clara em vez de um erro confuso lá na frente.
 if not HUGGINGFACE_API_TOKEN:
     raise RuntimeError(
