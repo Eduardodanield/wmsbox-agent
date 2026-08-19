@@ -101,8 +101,7 @@ wmsbox-agent/
 ├── .gitignore
 ├── .env.example               ← Modelo do arquivo de variáveis de ambiente
 ├── data/
-│   ├── estoque.csv             ← Base de dados do estoque
-│   └── estoque_exemplo.csv     ← Dados fictícios, usados como fallback no deploy público
+│   └── estoque.csv             ← Base de dados do estoque
 ├── src/
 │   ├── config.py               ← Carrega o token e configura o LLM (Hugging Face)
 │   ├── agente_estoque.py       ← Carrega o CSV e monta o agente pandas
@@ -256,7 +255,6 @@ O agente segue o mesmo princípio para qualquer combinação de filtro/soma/cont
 | LLM via Hugging Face (`ChatOpenAI` + roteador `router.huggingface.co/v1`) | Endpoint compatível com a API da OpenAI → tool calling maduro no LangChain, essencial para `agent_type="tool-calling"` funcionar bem |
 | `allow_dangerous_code=True` | Necessário para o agente executar o código pandas que ele mesmo escreve. Aceitável aqui porque o CSV é local e o agente não é exposto a usuários externos |
 | Caminho do CSV resolvido via `__file__` | Garante que `data/estoque.csv` seja encontrado não importa de qual pasta o script for executado |
-| `data/estoque_exemplo.csv` como fallback | Se `estoque.csv` não existir no ambiente (ex: um clone limpo do repositório), o app carrega dados fictícios em vez de travar |
 | Token lido de `st.secrets` como alternativa ao `.env` | No Streamlit Community Cloud não existe `.env` — o token é injetado pelo painel de "Secrets" do próprio serviço |
 
 ---
