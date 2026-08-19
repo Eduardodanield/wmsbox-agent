@@ -15,8 +15,7 @@ def main():
         try:
             pergunta = input("\nVocê: ").strip()
         except (KeyboardInterrupt, EOFError):
-            # Ctrl+C ou Ctrl+D também encerram o programa de forma limpa,
-            # sem mostrar um traceback assustador pra quem está usando.
+            # Sai limpo em Ctrl+C/Ctrl+D, sem traceback.
             print("\nAté mais!")
             break
 
@@ -31,9 +30,7 @@ def main():
             resposta = agente.invoke({"input": pergunta})
             print(f"\nAgente: {resposta['output']}")
         except Exception as erro:
-            # Um erro de rede ou de limite da API não deve derrubar o
-            # programa inteiro — melhor avisar e deixar a pessoa tentar
-            # a próxima pergunta.
+            # Erro de API não deve derrubar o programa inteiro.
             print(f"\nOcorreu um erro ao consultar o agente: {erro}")
 
 

@@ -17,3 +17,6 @@ langchain-openai>=1.0.0
 # create_pandas_dataframe_agent usa isso por baixo dos panos para formatar
 # uma amostra da tabela (df.head().to_markdown()) dentro do prompt do agente
 tabulate>=0.9.0
+
+# Interface visual (web) do agente
+streamlit>=1.40.0
